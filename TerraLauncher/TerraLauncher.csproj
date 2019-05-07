@@ -175,12 +175,6 @@
     <Resource Include="Resources\Images\movedown.png" />
     <Resource Include="Resources\Images\moveup.png" />
     <Resource Include="Resources\Images\remove.png" />
-    <None Include="TerraLauncher.Config.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TerraLauncher.Data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

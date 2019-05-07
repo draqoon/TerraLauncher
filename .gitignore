@@ -1,7 +1,7 @@
 .vs/
 .svn/
 **/bin/Debug/
-**/*.Data.json
+**/bin/Release/*.json
 **/bin/**/de/
 **/bin/**/es/
 **/bin/**/fr/
@@ -10,3 +10,4 @@
 **/bin/**/ru/
 **/bin/**/zh-Hans/
 **/bin/**/zh-Hant/
+**/obj/
