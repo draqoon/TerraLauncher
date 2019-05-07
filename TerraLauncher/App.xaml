@@ -1,0 +1,32 @@
+﻿<Application x:Class="TerraLauncher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="clr-namespace:System;assembly=mscorlib"
+             xmlns:c="clr-namespace:TerraLauncher.Views.Converters"
+             xmlns:local="clr-namespace:TerraLauncher">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TerraLauncher;component/Resources/Languages/ja-JP.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Boolean Values -->
+            <s:Boolean x:Key="True">True</s:Boolean>
+            <s:Boolean x:Key="False">False</s:Boolean>
+
+            <!-- Converters -->
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <c:ConverterPipe x:Key="NegativeBooleanToVisibilityConverter">
+                <c:BooleanNegativeConverter />
+                <BooleanToVisibilityConverter />
+            </c:ConverterPipe>
+            <c:BooleanNegativeConverter x:Key="BooleanNegativeConverter" />
+            <c:AddCalcConverter x:Key="AddCalc"  />
+            <c:AndBooleanMultiConverter x:Key="AndBool" />
+            <c:OrBooleanMultiConverter x:Key="OrBool" />
+            <c:BetweenConverter x:Key="Between" />
+            <c:ThicknessMultiConverter x:Key="ToThickness" />
+            <c:CastConverter x:Key="Cast" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

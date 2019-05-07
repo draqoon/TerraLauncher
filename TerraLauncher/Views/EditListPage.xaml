@@ -1,0 +1,254 @@
+﻿<Page x:Class="TerraLauncher.Views.EditListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TerraLauncher.Views"
+      xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+      xmlns:c="clr-namespace:TerraLauncher.Views.Converters"
+      xmlns:vm="clr-namespace:TerraLauncher.ViewModels"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:s="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      Title="{Binding PageTitle}"
+      FontSize="20"
+      x:Name="Page">
+
+    <Page.Resources>
+        <Style x:Key="ImageButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Icon" TargetType="Image">
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Opacity" Value="0.6" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="ToolTip" Value="" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ImageButtonImage" TargetType="Image">
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Opacity" Value="0.6" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1.0" />
+                </Trigger>
+                <DataTrigger
+                    Binding="{Binding IsEnabled, 
+                                      RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                     AncestorLevel=1,
+                                                                     AncestorType={x:Type Button}
+                                                     }
+                             }" Value="False">
+                    <Setter Property="Opacity" Value="0.3" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ListItemButton" TargetType="Button" BasedOn="{StaticResource ImageButton}">
+            <Setter Property="Opacity" Value="0" />
+            <Style.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsMouseOver, 
+                                      RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                     AncestorLevel=1,
+                                                                     AncestorType={x:Type DockPanel}
+                                                     }
+                             }" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ListButton" TargetType="Button" BasedOn="{StaticResource ImageButton}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2,2,2,2" />
+        </Style>
+        <Style x:Key="RunButton" TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Padding" Value="20,5" />
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+    </Page.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="Confirm;RemoveItem">
+            <l:ConfirmationDialogInteractionMessageAction />
+        </l:InteractionMessageTrigger>
+    </i:Interaction.Triggers>
+
+    <StackPanel Orientation="Vertical">
+
+        <Label Content="{Binding PageTitle}" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+        <StackPanel Orientation="Horizontal">
+
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,2,0">
+                <Button Style="{StaticResource ListButton}">
+                    <Button.Content>
+                        <Image Source="/TerraLauncher;component/Resources/Images/add.png" 
+                               Style="{StaticResource ImageButtonImage}" 
+                               ToolTip="{StaticResource Lang:Add}" />
+                    </Button.Content>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="AddItem" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Style="{StaticResource ListButton}" IsEnabled="{Binding CanMoveUp.Value}">
+                    <Button.Content>
+                        <Image Source="/TerraLauncher;component/Resources/Images/moveup.png" 
+                               Style="{StaticResource ImageButtonImage}" 
+                               ToolTip="{StaticResource Lang:MoveUp}" />
+                    </Button.Content>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="MoveItem" MethodParameter="{StaticResource False}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Style="{StaticResource ListButton}" IsEnabled="{Binding CanMoveDown.Value}">
+                    <Button.Content>
+                        <Image Source="/TerraLauncher;component/Resources/Images/movedown.png" 
+                               Style="{StaticResource ImageButtonImage}" 
+                               ToolTip="{StaticResource Lang:MoveDown}" />
+                    </Button.Content>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="MoveItem" MethodParameter="{StaticResource True}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </StackPanel>
+
+            <ListBox MinWidth="250" MinHeight="300" Margin="0,0,5,0" ItemsSource="{Binding Items, Mode=OneWay}" SelectedItem="{Binding SelectedItem.Value, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                            <Image DockPanel.Dock="Left"
+                                   Source="/TerraLauncher;component/Resources/Images/lock.png" 
+                                   Style="{StaticResource Icon}" 
+                                   IsEnabled="{Binding Locked, Mode=OneWay}"
+                                   Visibility="{Binding Locked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   ToolTip="{StaticResource Lang:Lock}" />
+                            <Image DockPanel.Dock="Left"
+                                   Source="/TerraLauncher;component/Resources/Images/hidden.png"
+                                   Style="{StaticResource Icon}" 
+                                   IsEnabled="{Binding Hidden, Mode=OneWay}"
+                                   Visibility="{Binding Hidden, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   ToolTip="{StaticResource Lang:Hidden}" />
+
+                            <Button DockPanel.Dock="Right" Style="{StaticResource ListItemButton}" HorizontalAlignment="Right">
+                                <Button.Content>
+                                    <Image Source="/TerraLauncher;component/Resources/Images/edit.png" 
+                                           Style="{StaticResource ImageButtonImage}" 
+                                           ToolTip="{StaticResource Lang:Edit}" />
+                                </Button.Content>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <l:LivetCallMethodAction MethodTarget="{Binding DataContext, ElementName=Page}" MethodName="EditItem" MethodParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button DockPanel.Dock="Right" Style="{StaticResource ListItemButton}" HorizontalAlignment="Right">
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="/TerraLauncher;component/Resources/Images/duplicate.png" 
+                                               Style="{StaticResource ImageButtonImage}" 
+                                               ToolTip="{StaticResource Lang:Duplicate}" />
+                                    </StackPanel>
+                                </Button.Content>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <l:LivetCallMethodAction MethodTarget="{Binding DataContext, ElementName=Page}" MethodName="AddItem" MethodParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button DockPanel.Dock="Right" Style="{StaticResource ListItemButton}" HorizontalAlignment="Right"
+                                    IsEnabled="{Binding Locked, Converter={StaticResource BooleanNegativeConverter}}">
+                                <Button.Content>
+                                    <Image Source="/TerraLauncher;component/Resources/Images/remove.png" 
+                                           Style="{StaticResource ImageButtonImage}" 
+                                           ToolTip="{StaticResource Lang:Remove}" />
+                                </Button.Content>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <l:LivetCallMethodAction MethodTarget="{Binding DataContext, ElementName=Page}" MethodName="DeleteItem" MethodParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button DockPanel.Dock="Right" Style="{StaticResource ListItemButton}" HorizontalAlignment="Right">
+                                <Button.Content>
+                                    <StackPanel>
+                                        <Image Source="/TerraLauncher;component/Resources/Images/hidden.png" 
+                                               Style="{StaticResource ImageButtonImage}" 
+                                               ToolTip="{StaticResource Lang:Hidden}" />
+                                    </StackPanel>
+                                </Button.Content>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <l:LivetCallMethodAction MethodTarget="{Binding DataContext, ElementName=Page}" MethodName="ToggleItemVisible" MethodParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+
+                            <Label Content="{Binding Title}" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{StaticResource Lang:Save}" 
+                    Style="{StaticResource RunButton}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Apply" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Content="{StaticResource Lang:Cancel}" 
+                    Style="{StaticResource RunButton}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Cancel" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Page>

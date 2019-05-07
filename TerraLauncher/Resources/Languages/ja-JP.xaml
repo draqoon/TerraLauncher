@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <s:String x:Key="Lang:Add">追加</s:String>
+    <s:String x:Key="Lang:Browse">参照</s:String>
+    <s:String x:Key="Lang:Cancel">キャンセル</s:String>
+    <s:String x:Key="Lang:Christmas">クリスマス ({0:yyyy}-12-25)</s:String>
+    <s:String x:Key="Lang:ConfirmRemove">削除します。よろしいですか？</s:String>
+    <s:String x:Key="Lang:ConfirmRestore">復元します。よろしいですか？</s:String>
+    <s:String x:Key="Lang:Duplicate">複製</s:String>
+    <s:String x:Key="Lang:Edit">編集</s:String>
+    <s:String x:Key="Lang:English">英語</s:String>
+    <s:String x:Key="Lang:Environment">実行環境</s:String>
+    <s:String x:Key="Lang:FullScreen">全画面表示</s:String>
+    <s:String x:Key="Lang:Group">グループ</s:String>
+    <s:String x:Key="Lang:Halloween">ハロウィン ({0:yyyy}-10-30)</s:String>
+    <s:String x:Key="Lang:Height">高さ</s:String>
+    <s:String x:Key="Lang:Hidden">非表示</s:String>
+    <s:String x:Key="Lang:InfoSelectInstallDirectory">インストールディレクトリを選択</s:String>
+    <s:String x:Key="Lang:InfoSelectSaveDirectory">セーブディレクトリを選択</s:String>
+    <s:String x:Key="Lang:InstallDirectory">インストールディレクトリ</s:String>
+    <s:String x:Key="Lang:Japanese">日本語</s:String>
+    <s:String x:Key="Lang:Language">言語</s:String>
+    <s:String x:Key="Lang:Lock">固定</s:String>
+    <s:String x:Key="Lang:ModLoader">ModLoader 環境</s:String>
+    <s:String x:Key="Lang:MoveDown">下へ移動</s:String>
+    <s:String x:Key="Lang:MoveUp">上へ移動</s:String>
+    <s:String x:Key="Lang:Quit">終了</s:String>
+    <s:String x:Key="Lang:Realtime">現在 ({0:yyyy-MM-dd})</s:String>
+    <s:String x:Key="Lang:Remove">削除</s:String>
+    <s:String x:Key="Lang:Resolution">画面解像度</s:String>
+    <s:String x:Key="Lang:Restore">復元</s:String>
+    <s:String x:Key="Lang:Run">起動</s:String>
+    <s:String x:Key="Lang:RunDate">実行日</s:String>
+    <s:String x:Key="Lang:Save">保存</s:String>
+    <s:String x:Key="Lang:SaveDirectory">セーブディレクトリ</s:String>
+    <s:String x:Key="Lang:Support4K">4K サポート</s:String>
+    <s:String x:Key="Lang:Title">表示名称</s:String>
+    <s:String x:Key="Lang:Value">設定値</s:String>
+    <s:String x:Key="Lang:Width">幅</s:String>
+    <s:String x:Key="Lang:Waiting">起動中...</s:String>
+
+    <s:String x:Key="Lang:AlreadyRunning">テラリアは既に実行中です。</s:String>
+
+    <s:String x:Key="Lang:RequireSelect">{0}を選択してください。</s:String>
+
+    <s:String x:Key="Lang:Require:Title">表示名称を入力してください。</s:String>
+    <s:String x:Key="Lang:Require:InstallDirectory">インストールディレクトリを入力してください。</s:String>
+    <s:String x:Key="Lang:Require:SaveDirectory">セーブディレクトリを入力してください。</s:String>
+    <s:String x:Key="Lang:Require:Value">設定値を入力してください。</s:String>
+    <s:String x:Key="Lang:Require:Width">1024以上の数値を幅へ入力してください。</s:String>
+    <s:String x:Key="Lang:Require:Height">768以上の数値を高さへ入力してください。</s:String>
+
+    <s:String x:Key="Lang:Invalid:Date">有効な日付を指定してください。</s:String>
+
+    <s:String x:Key="Lang:NotFound:InstallDirectory">インストールディレクトリが見つかりませんでした。</s:String>
+    <s:String x:Key="Lang:NotFound:SaveDirectory">セーブディレクトリが見つかりませんでした。</s:String>
+
+</ResourceDictionary>

@@ -1,0 +1,34 @@
+﻿<NavigationWindow
+    x:Class="TerraLauncher.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:TerraLauncher.Views"
+    xmlns:vm="clr-namespace:TerraLauncher.ViewModels"
+    xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    mc:Ignorable="d"
+    Source="MainPage.xaml"
+    ResizeMode="CanMinimize"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    ShowsNavigationUI="False">
+
+    <NavigationWindow.Title>
+        Terraria Launcher
+        <!--<Binding Path="CanCloseWindow.Value" StringFormat="Terraria Launcher: {0}" />-->
+    </NavigationWindow.Title>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <i:Interaction.Behaviors>
+        <l:WindowCloseCancelBehavior CanClose="{Binding CanCloseWindow.Value}" CloseCanceledCallbackMethodTarget="{Binding}" CloseCanceledCallbackMethodName="OnClosing" />
+    </i:Interaction.Behaviors>
+
+</NavigationWindow>
