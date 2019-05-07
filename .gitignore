@@ -1,0 +1,12 @@
+.vs/
+.svn/
+**/bin/Debug/
+**/*.Data.json
+**/bin/**/de/
+**/bin/**/es/
+**/bin/**/fr/
+**/bin/**/it/
+**/bin/**/ko/
+**/bin/**/ru/
+**/bin/**/zh-Hans/
+**/bin/**/zh-Hant/
